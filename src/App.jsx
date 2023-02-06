@@ -35,7 +35,13 @@ function App() {
     const [lat, setLat] = useState()
     const [lon, setLon] = useState()
     const [input, setInput] = useState('')
-    const [selected, setSelected] = useState({})
+    const [selected, setSelected] = useState([])
+    const [acity, setCity] = useState({
+        "country": "AD",
+    "name": "Sant Julià de Lòria",
+    "lat": "42.46372",
+    "lng": "1.49129"
+    })
 
     function toTitleCase(str) {
         return str.replace(
@@ -45,14 +51,22 @@ function App() {
           }
         );
       }
+    
+    function onSearch(city) {
+        setCity(city)
+        setInput(city.name)
+        setLat(city.lat)
+        setLon(city.lng)
+    }
 
     useEffect(() => {
         let searched = cities.filter((city)=>{
-            return city.name.search(input) !== -1 ||
-                    city.name.search(toTitleCase(input)) !== -1
+            return input && (city.name.search(input) !== -1 ||
+                    city.name.search(toTitleCase(input)) !== -1)
         })
         
         console.log(searched)
+        setSelected(searched)
         
     }, [input])
     
@@ -93,7 +107,7 @@ function App() {
 
         }
 
-        getISSLocation()
+        input === "" && getISSLocation()
         async function fetchData() {
 
             // I need to send the query for user's lat and long with the request to get the current location of the user weather data
@@ -118,9 +132,26 @@ function App() {
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
                   type="text"
-                  className="border border-none bg-black text-white max-sm w-1/2 text-center rounded-sm mt-4 focus:outline-gray-700 focus:border-gray-700 outline-0 "
+                  className="border border-none  bg-black text-white max-sm w-1/2 text-center rounded-sm mt-4 focus:outline-gray-700 focus:border-gray-700 outline-0 "
                   placeholder="Search with city name"
                 ></input>
+                <div className={`bg-white text-black flex flex-col border-gray-700 border-soild border-2 empty:border-none min-w-fit`} >
+                    {
+                        cities.filter((city)=>{
+                            const searchTerm = input.toLowerCase()
+                            const cityName = city.name.toLowerCase()
+
+                            return searchTerm && (cityName.startsWith(searchTerm)) && cityName !== acity.name.toLowerCase()
+                                })
+                            .slice(0,10)
+                            .map((city,i)=>(
+                                <div className="cursor-pointer text-start my-0.5 mx-1" key={i} onClick={()=>onSearch(city)}>{city.name}, {city.country}</div>         
+                            ))
+                    }
+                    {/* {selected !== [] && selected.map((item) => (
+                        <div className="cursor-pointer text-start my-0.5" key={item.lat} onClick={()=>onSearch(item)}>{item.name}</div>
+                    ))} */}
+                </div>
                 <div className="my-40 items-center justify-center flex-col m-auto text-center inline-block align-middle">
                   <p className="text-blue-500 font-medium max-w-full text-center text-6xl my-1 max-md:text-3xl">
                     Temprature is : {!data ? "Loading..." : data.current.temp_c}{" "}
@@ -158,7 +189,7 @@ function App() {
             </body>
           </Route>
           <Route path={`/weather/${input.toLowerCase}`} >
-            <City city={selected} />
+            <City city={acity} />
           </Route>
         </Switch>
       </Router>
