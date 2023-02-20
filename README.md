@@ -15,3 +15,8 @@ How it works:
 *Also I added a search Feild that you can check the data for any city around the globe*
 
 *I added a weekly forecast feild but unfortunately I found that in order to get the data for more than 3 days to come I had to pay WeatherAPI so I decided to leave it as it is :)*
+
+Snapshots:
+-
+![Snap of weather-app-01](https://user-images.githubusercontent.com/108346469/220206098-5e89927c-812a-4617-ae62-2d513a63d690.png)
+![Snap of weather-app-02](https://user-images.githubusercontent.com/108346469/220206103-9bfd9b4f-8d42-46a8-86b5-d7231be772eb.png)
