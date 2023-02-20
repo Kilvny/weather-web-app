@@ -18,5 +18,6 @@ How it works:
 
 Snapshots:
 -
-![Snap of weather-app-01](https://user-images.githubusercontent.com/108346469/220206098-5e89927c-812a-4617-ae62-2d513a63d690.png)
 ![Snap of weather-app-02](https://user-images.githubusercontent.com/108346469/220206103-9bfd9b4f-8d42-46a8-86b5-d7231be772eb.png)
+
+![Snap of weather-app-01](https://user-images.githubusercontent.com/108346469/220206098-5e89927c-812a-4617-ae62-2d513a63d690.png)
