@@ -2,31 +2,34 @@ import React, { useEffect, useState } from "react";
 import cities from "cities.json";
 // import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import City from "./components/City";
-import { createBrowserRouter, Link, Navigate, RouterProvider } from "react-router-dom";
+import {
+  createBrowserRouter,
+  Link,
+  Navigate,
+  RouterProvider,
+} from "react-router-dom";
 import ClipLoader from "react-spinners/ClipLoader";
 import DayCard from "./components/DayCard";
 
-
-
 // react routes
 const router = createBrowserRouter([
-    {
-        path: '/',
-        element: <AppMain />
-    },
-    {
-        path: '/home',
-        element: <AppMain />
-    },
-    {
-        path: '/weather',
-        element: <AppMain />
-    },
-    {
-        path: '*', // error handeling to redirect user to home when path doesn't exist
-        element: <Navigate to={'/'} />
-    }
-])
+  {
+    path: "/",
+    element: <AppMain />,
+  },
+  {
+    path: "/home",
+    element: <AppMain />,
+  },
+  {
+    path: "/weather",
+    element: <AppMain />,
+  },
+  {
+    path: "*", // error handeling to redirect user to home when path doesn't exist
+    element: <Navigate to={"/"} />,
+  },
+]);
 
 function AppMain() {
   const [data, setData] = useState();
@@ -113,16 +116,23 @@ function AppMain() {
     }
     fetchData();
     async function getForecast() {
-        const res = await fetch(`http://localhost:8080/api/weather/forecast/${lat},${lon}`)
-        const data = await res.json()
-            .then((data) => { setForecast(data) })
-            .then(()=>{console.log(forecast)})
+      const res = await fetch(
+        `http://localhost:8080/api/weather/forecast/${lat},${lon}`
+      );
+      const data = await res
+        .json()
+        .then((data) => {
+          setForecast(data);
+        })
+        .then(() => {
+          console.log(forecast);
+        });
     }
-    getForecast()
+    getForecast();
     // clean up function to reset the search feild after the user select the desired city
-    return (()=>{
-        setInput('');
-    })
+    return () => {
+      setInput("");
+    };
   }, [lat, lon]);
 
   return (
@@ -234,7 +244,10 @@ function AppMain() {
             </svg>
           </Link>
           {/* Instagram */}
-          <Link to={"https://www.instagram.com/kilanyishere/"} target={"_blank"}>
+          <Link
+            to={"https://www.instagram.com/kilanyishere/"}
+            target={"_blank"}
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               class="icon icon-tabler icon-tabler-brand-instagram"
@@ -259,23 +272,21 @@ function AppMain() {
   );
 }
 
-
-
 function App() {
-    return (
-      <RouterProvider
-        router={router}
-        fallbackElement={
-          <ClipLoader
-            color="#363cd6"
-            cssOverride={{}}
-            loading
-            size={100}
-            speedMultiplier={1}
-          />
-        }
-      />
-    );
+  return (
+    <RouterProvider
+      router={router}
+      fallbackElement={
+        <ClipLoader
+          color="#363cd6"
+          cssOverride={{}}
+          loading
+          size={100}
+          speedMultiplier={1}
+        />
+      }
+    />
+  );
 }
 
 export default App;
