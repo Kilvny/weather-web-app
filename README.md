@@ -22,4 +22,4 @@ Snapshots:
 
 ![Snap of weather-app-01](https://user-images.githubusercontent.com/108346469/220206098-5e89927c-812a-4617-ae62-2d513a63d690.png)
 
-![weather app](https://user-images.githubusercontent.com/108346469/220337653-51f5941b-e0e2-427f-8512-a4c48f400b0c.gif)
+   ![weather app](https://user-images.githubusercontent.com/108346469/220337653-51f5941b-e0e2-427f-8512-a4c48f400b0c.gif)
